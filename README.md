@@ -43,7 +43,9 @@ Get into directory with cellframe-tool-sign and execute the following commands
 *-j$(nproc)* nrpoc parameter depends on your machine capacity - number of processor cores.
 
 -Replace arm64-v8a to any of the following architecture types if necessary:
--armeabi-v7a
--x86
--x86_64
+
+1) armeabi-v7a
+2) x86
+3) x86_64
+
 As a result, you should create a libcellframe-tool-sign.so file that can now be used on an Android device
