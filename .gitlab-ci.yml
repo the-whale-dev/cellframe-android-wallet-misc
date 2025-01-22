@@ -1,0 +1,39 @@
+variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_UPDATE_FLAGS: --force
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH
+
+stages:
+    - build
+
+.ci-polygon:
+  tags:
+     - ci-polygon
+
+.build:  
+  extends: .ci-polygon
+  stage: build
+  timeout: 3 hours 30 minutes
+  dependencies: []
+  interruptible: true
+
+
+amd64:linux.rwd.bld:
+    extends: .build
+    stage: build
+
+    image: demlabs/debian/amd64:qt5
+    before_script: 
+      - /opt/buildtools/prepare_environment.sh amd64-linux
+    script:
+      - mkdir build && cd build && cmake .. && make
+      - /opt/buildtools/deploy_files.sh pub_cellframe linux/cellframe-tool-sign/$CI_COMMIT_REF_NAME/ cellframe-tool-sign 
+
+
+      
