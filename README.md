@@ -1,3 +1,5 @@
+## This is a minimally modified version of [cellframe-tool-sign](https://gitlab.demlabs.net/cellframe/cellframe-tool-sign) to be compatible with Android devices
+
 ### Build from sources:
 
 #### Linux Prerequsites 
